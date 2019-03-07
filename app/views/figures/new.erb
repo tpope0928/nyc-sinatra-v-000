@@ -1,27 +1,41 @@
-<form action="/figures" method="POST">
-  <lable>Name</label>
-    <input type="text" id="figure_name" name="figure[name]"><br></br>
+<h1>New Figure</h1>
 
-  <label><h4>Titles</h4></label>
-    <% Title.all.each do |title| %>
-      <label><%= title.name %></label>
-      <input type="checkbox" id="title_<%=title.id%>" name="figure[title_ids][]" value="<%= title.id %>"><br>
+<h2>Details</h2>
+<form action='/figures' method='post'>
+  <div>
+    <label for='figure_name'>Name:</label>
+    <input type='text' id='figure_name' name='figure[name]'>
+  </div>
 
-    <% end %>
- <label><h4>Create New Title:</h4></label>
-  <input type="text" id="new_title" name="title[name]">
+  <br>
+  <h3>Associated Titles</h3>
+  <% Title.all.each do |title| %>
+    <input type='checkbox' name='figure[title_ids][]'
+          value='<%=title.id%>' id="title_<%=title.id%>"><%=title.name%></input>
+  <% end %>
 
+  <br>
+  <h3>Enter New Title (optional)</h3>
+  <div>
+    <label for='new_title'>Name:</label>
+    <input type='text' id='new_title' name='title[name]'>
+  </div>
 
-  <label><h4>Landmarks</h4></label>
-    <% Landmark.all.each do |landmark| %>
-      <label><%= landmark.name %></label>
-      <input type="checkbox" id="landmark_<%=landmark.id%>" name="figure[landmark_ids][]" value="<%= landmark.id %>"><br>
+  <br>
+  <h3>Associated Landmarks</h3>
+  <% Landmark.all.each do |landmark| %>
+  <input type='checkbox' name='figure[landmark_ids][]'
+        value='<%=landmark.id%>' id="landmark_<%=landmark.id%>"><%=landmark.name%></input>
+  <% end %>
 
-    <% end %>
- <label><h4>Create New Landmark:</h4></label>
- <label>Name:</label>
-  <input type="text" id="new_landmark" name="landmark[name]">
-  <label>Year:</label>
-  <input type="text" name="landmark[year_completed]">
-  <input type="submit" value="Create New Figure">
+  <br>
+  <h3>Enter New Landmark (optional)</h3>
+  <div>
+    <label for='new_landmark'>Name:</label>
+    <input type='text' id='new_landmark' name='landmark[name]'>
+  </div>
+
+  <br><br>
+  <input type='submit' value='Create New Figure'>
+
 </form>
